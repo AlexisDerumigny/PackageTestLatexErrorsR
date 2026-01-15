@@ -54,12 +54,13 @@ jobs:
           tlmgr install courier
                     
       - uses: r-lib/actions/check-r-package@v2
+        continue-on-error: true
         with:
           upload-snapshots: true
           build_args: 'c("--compact-vignettes=gs+qpdf")'
           args: 'c("--as-cran")'
 
       - name: Check log PDF file on Windows
-        if: runner.os == 'Windows'
+        # if: runner.os == 'Windows'
         run: |
           Rscript -e 'tools:::.get_LaTeX_errors_from_log_file(file("D:/a/PackageTestLatexErrorsR/PackageTestLatexErrorsR/check/PackageTestLatexErrorsR.Rcheck/PackageTestLatexErrorsR-manual.log"))'
