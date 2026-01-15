@@ -61,6 +61,22 @@ jobs:
           args: 'c("--as-cran")'
 
       - name: Check log PDF file on Windows
-        # if: runner.os == 'Windows'
+        if: runner.os == 'Windows'
         run: |
-          Rscript -e 'tools:::.get_LaTeX_errors_from_log_file(file("D:/a/PackageTestLatexErrorsR/PackageTestLatexErrorsR/check/PackageTestLatexErrorsR.Rcheck/PackageTestLatexErrorsR-manual.log"))'
+          Rscript -e '
+            Rd2pdf_opts <- "--no-preview --internals"
+            build_dir <- "D:/a/PackageTestLatexErrorsR/PackageTestLatexErrorsR/check/PackageTestLatexErrorsR.Rcheck/"
+            pkgname <- "PackageTestLatexErrorsR"
+            man_file <- paste0(pkgname, "-manual.pdf ")
+            ## precautionary remove in case some other attempt left it behind
+            if(file.exists(man_file)) unlink(man_file)
+            args <- c( "Rd2pdf ", Rd2pdf_opts,
+                      paste0("--build-dir=", shQuote(build_dir)),
+                      "--no-clean", "-o ", man_file , shQuote(topdir))
+            
+            res <- tools:::run_Rcmd(args,  "Rdlatex.log", timeout = "")
+            print(res)
+            
+            latex_log <- file.path(build_dir, "Rd2.log")
+            tools:::.get_LaTeX_errors_from_log_file(file(latex_log)) |> print()
+            '
