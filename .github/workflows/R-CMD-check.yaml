@@ -103,6 +103,11 @@ jobs:
             print("Rd2pdf is finished, result is:")
             print(res)
             
+            print("running Rd2pdf from R...")
+            res <- tools:::..Rd2pdf(args[-1])
+            print("Rd2pdf is finished, result is:")
+            print(res)
+            
             latex_log <- file.path(build_dir, "Rd2.log")
             tools:::.get_LaTeX_errors_from_log_file(file(latex_log)) |> print()
           '@
