@@ -104,7 +104,10 @@ jobs:
             print(res)
             
             print("running Rd2pdf from R...")
-            res <- tools:::..Rd2pdf(args[-1])
+            args_R = args[-1]
+            args_R <- paste(args_R, collapse=" ")
+            args_R <- strsplit(args_R,'nextArg', fixed = TRUE)[[1L]][-1L]
+            res <- tools:::..Rd2pdf(args_R)
             print("Rd2pdf is finished, result is:")
             print(res)
             
