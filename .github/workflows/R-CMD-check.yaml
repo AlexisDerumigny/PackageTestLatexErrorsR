@@ -108,8 +108,8 @@ jobs:
             print("Rd2pdf is finished, result is:")
             print(res)
             
-            latex_log <- file.path(build_dir, "Rd2.log")
-            tools:::.get_LaTeX_errors_from_log_file(file(latex_log)) |> print()
+            # latex_log <- file.path(build_dir, "Rd2.log")
+            # tools:::.get_LaTeX_errors_from_log_file(file(latex_log)) |> print()
           '@
           # Write to a temporary file
           $tempScript = New-TemporaryFile | Rename-Item -NewName { $_ -replace '\.tmp$', '.R' } -PassThru
