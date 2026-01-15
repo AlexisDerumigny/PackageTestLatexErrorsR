@@ -73,10 +73,19 @@ jobs:
             man_file <- paste0(pkgname, "-manual.pdf ")
             print("preparing to remove file if it exists")
             ## precautionary remove in case some other attempt left it behind
-            if(file.exists(man_file)) unlink(man_file)
+            if(file.exists(man_file)) {
+              print("man_file already exists")
+              unlink(man_file)
+              print("man_file" now deleted)
+            } else {
+              print("no man_file found")
+            }
+            print("preparing args")
             args <- c( "Rd2pdf ", Rd2pdf_opts,
                       paste0("--build-dir=", shQuote(build_dir)),
-                      "--no-clean", "-o ", man_file , shQuote(topdir))
+                      "--no-clean", "-o ", man_file 
+                      #, shQuote(topdir)
+                      )
             
             print("running Rd2pdf...")
             res <- tools:::run_Rcmd(args,  "Rdlatex.log", timeout = "")
