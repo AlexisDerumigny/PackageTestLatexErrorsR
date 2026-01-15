@@ -63,7 +63,7 @@ jobs:
       - name: Check log PDF file on Windows
         if: runner.os == 'Windows'
         run: |
-          Rscript -e '
+          Rscript -e @'
             Rd2pdf_opts <- "--no-preview --internals"
             build_dir <- "D:/a/PackageTestLatexErrorsR/PackageTestLatexErrorsR/check/PackageTestLatexErrorsR.Rcheck/"
             pkgname <- "PackageTestLatexErrorsR"
@@ -79,4 +79,4 @@ jobs:
             
             latex_log <- file.path(build_dir, "Rd2.log")
             tools:::.get_LaTeX_errors_from_log_file(file(latex_log)) |> print()
-            '
+            '@
