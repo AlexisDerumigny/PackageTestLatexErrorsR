@@ -84,7 +84,7 @@ jobs:
             args <- c( "Rd2pdf ", Rd2pdf_opts,
                       paste0("--build-dir=", shQuote(build_dir)),
                       "--no-clean", "-o ", man_file 
-                      #, shQuote(topdir)
+                      , shQuote(build_dir)
                       )
             
             print("running Rd2pdf...")
