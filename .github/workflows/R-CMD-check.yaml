@@ -91,6 +91,17 @@ jobs:
             res <- tools:::run_Rcmd(args,  "Rdlatex.log", timeout = "")
             print("Rd2pdf is finished, result is:")
             print(res)
+
+            print("preparing args without build_dir")
+            args <- c( "Rd2pdf ", Rd2pdf_opts,
+                      paste0("--build-dir=", shQuote(build_dir)),
+                      "--no-clean", "-o ", man_file
+                      )
+            
+            print("running Rd2pdf...")
+            res <- tools:::run_Rcmd(args,  "Rdlatex.log", timeout = "")
+            print("Rd2pdf is finished, result is:")
+            print(res)
             
             latex_log <- file.path(build_dir, "Rd2.log")
             tools:::.get_LaTeX_errors_from_log_file(file(latex_log)) |> print()
