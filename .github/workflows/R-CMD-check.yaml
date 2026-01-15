@@ -65,10 +65,13 @@ jobs:
         run: |
           $codeR = @'
             print("R is starting")
+            print("second print")
+            print(sessionInfo())
             Rd2pdf_opts <- "--no-preview --internals"
             build_dir <- "D:/a/PackageTestLatexErrorsR/PackageTestLatexErrorsR/check/PackageTestLatexErrorsR.Rcheck/"
             pkgname <- "PackageTestLatexErrorsR"
             man_file <- paste0(pkgname, "-manual.pdf ")
+            print("preparing to remove file if it exists")
             ## precautionary remove in case some other attempt left it behind
             if(file.exists(man_file)) unlink(man_file)
             args <- c( "Rd2pdf ", Rd2pdf_opts,
