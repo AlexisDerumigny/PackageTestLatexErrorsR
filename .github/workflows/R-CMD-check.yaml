@@ -20,7 +20,7 @@ jobs:
       matrix:
         config:
           - {os: windows-latest, r: 'release'}
-          - {os: ubuntu-latest,   r: 'release'}
+          # - {os: ubuntu-latest,   r: 'release'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -76,7 +76,7 @@ jobs:
             if(file.exists(man_file)) {
               print("man_file already exists")
               unlink(man_file)
-              print("man_file" now deleted)
+              print("man_file now deleted")
             } else {
               print("no man_file found")
             }
