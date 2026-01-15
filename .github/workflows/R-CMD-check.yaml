@@ -86,5 +86,5 @@ jobs:
             latex_log <- file.path(build_dir, "Rd2.log")
             tools:::.get_LaTeX_errors_from_log_file(file(latex_log)) |> print()
           '@
-          
-          Rscript -e $codeR
+          $rCode = $codeR -replace '\r?\n', ' ; '
+          Rscript -e $rCode
