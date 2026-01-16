@@ -54,7 +54,7 @@ jobs:
           tlmgr update --self --all
           tlmgr install makeidx
           tlmgr install courier
-          Rscript -e  'tinytex:::install_yihui_pkgs()'
+          Rscript -e  'install.packages("tinytex"); tinytex:::install_yihui_pkgs()'
                     
       - uses: r-lib/actions/check-r-package@v2
         continue-on-error: true
