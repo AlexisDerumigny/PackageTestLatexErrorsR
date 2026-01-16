@@ -51,7 +51,9 @@ jobs:
         if: runner.os == 'Windows'
         run: |
           tlmgr --version
-          tlmgr install courier makeidx
+          tlmgr update --self --all
+          tlmgr install makeidx
+          tlmgr install courier
                     
       - uses: r-lib/actions/check-r-package@v2
         continue-on-error: true
@@ -277,6 +279,9 @@ jobs:
                   } else files <- c(files, a)
                   args <- args[-1L]
               }
+              cat("build_dir in ..Rd2pdf: \n")
+              print(build_dir)
+              cat("\n")
           
               if(!length(files)) {
                   message("no inputs")
@@ -321,7 +326,7 @@ jobs:
                   q("no", status = 2L, runLast = FALSE)
               }
               cat("build_dir in ..Rd2pdf: \n")
-              cat(build_dir)
+              print(build_dir)
               cat("\n")
               dir.create(build_dir, FALSE)
           
