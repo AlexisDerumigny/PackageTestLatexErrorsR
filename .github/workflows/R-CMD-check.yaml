@@ -45,6 +45,22 @@ jobs:
           needs: check
           
       - uses: r-lib/actions/setup-tinytex@v2
+      
+      - name: Download makeidx from CTAN
+        run: |
+          Invoke-WebRequest -Uri "https://mirrors.ctan.org/macros/latex/required/tools/makeidx.ins" -OutFile "makeidx.ins"
+          Invoke-WebRequest -Uri "https://mirrors.ctan.org/macros/latex/required/tools/makeidx.dtx" -OutFile "makeidx.dtx"
+
+      - name: Generate makeidx.sty
+        run: latex makeidx.ins
+
+      - name: Install makeidx.sty locally
+        run: |
+          New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\texmf\tex\latex\makeidx"
+          Move-Item -Force -Path "makeidx.sty" -Destination "$env:USERPROFILE\texmf\tex\latex\makeidx\makeidx.sty"
+
+      - name: Update filename database
+        run: texhash "$env:USERPROFILE\texmf"
 
       - name: Install courier font and LaTeX package makeidx on Windows
         # to fix PDF error "Cannot find pcrr8t.mf."
