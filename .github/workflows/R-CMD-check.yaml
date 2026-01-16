@@ -119,13 +119,14 @@ jobs:
             #
             
             print("preparing args with build_dir but no space")
-            args <- c("Rd2pdf ", Rd2pdf_opts,
+            cat("build_dir=", build_dir, "\n")
+            args <- c(Rd2pdf_opts,
                       "--build-dir=", build_dir,
                       "--no-clean", "-o", man_file, build_dir
                       )
                       
             print("running Rd2pdf from R...")
-            res <- tools:::..Rd2pdf(args[-1])
+            res <- tools:::..Rd2pdf(args)
             print("Rd2pdf is finished, result is:")
             print(res)
             
