@@ -52,12 +52,11 @@ jobs:
         run: |
           tlmgr --version
           tlmgr update --self --all
-          tlmgr install makeidx
+          tlmgr install makeindex 
           tlmgr install courier
-          Rscript -e  'install.packages("tinytex"); tinytex:::install_yihui_pkgs()'
+         # Rscript -e  'install.packages("tinytex"); tinytex:::install_yihui_pkgs()'
                     
       - uses: r-lib/actions/check-r-package@v2
-        continue-on-error: true
         with:
           upload-snapshots: true
           build_args: 'c("--compact-vignettes=gs+qpdf")'
@@ -375,4 +374,4 @@ jobs:
           Set-Content -Path $tempScript.FullName -Value $codeR
 
           # Run the script
-          Rscript $tempScript.FullName
+          # Rscript $tempScript.FullName
