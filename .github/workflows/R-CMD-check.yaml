@@ -320,7 +320,7 @@ jobs:
                   cat("cannot write to build dir\n")
                   q("no", status = 2L, runLast = FALSE)
               }
-              car("build_dir in ..Rd2pdf: \n")
+              cat("build_dir in ..Rd2pdf: \n")
               cat(build_dir)
               cat("\n")
               dir.create(build_dir, FALSE)
