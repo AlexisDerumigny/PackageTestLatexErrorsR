@@ -67,7 +67,7 @@ jobs:
             print("R is starting")
             print("second print")
             print(sessionInfo())
-            Rd2pdf_opts <- "--no-preview --internals"
+            Rd2pdf_opts <- c("--no-preview", "--internals")
             build_dir <- "D:/a/PackageTestLatexErrorsR/PackageTestLatexErrorsR/check/PackageTestLatexErrorsR.Rcheck/"
             pkgname <- "PackageTestLatexErrorsR"
             man_file <- paste0(pkgname, "-manual.pdf ")
@@ -104,10 +104,7 @@ jobs:
             print(res)
             
             print("running Rd2pdf from R...")
-            args_R = args[-1]
-            args_R <- paste(args_R, collapse=" ")
-            args_R <- strsplit(args_R,'nextArg', fixed = TRUE)[[1L]][-1L]
-            res <- tools:::..Rd2pdf(args_R)
+            res <- tools:::..Rd2pdf(args[-1])
             print("Rd2pdf is finished, result is:")
             print(res)
             
